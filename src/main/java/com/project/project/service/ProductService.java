@@ -9,5 +9,7 @@ public interface ProductService {
     List<Product> getProducts();
     Product getProductById(int id);
     Product updateProduct(ProductDTO productDTO);
+    List<Product> getProductsByName(String name);
+    boolean softDeleteProduct(int id);
   
 }

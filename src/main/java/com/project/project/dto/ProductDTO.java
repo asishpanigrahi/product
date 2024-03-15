@@ -1,6 +1,7 @@
 
 package com.project.project.dto;
 
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,56 +14,51 @@ import lombok.Setter;
 
 @Data
 public class ProductDTO {
-	
-	private int id;
-	@NotBlank(message = "The name is required.")
-    @Size(min = 3, max = 20, message = "The name must be from 3 to 20 characters.")
-    private String name;
 
-    @NotNull(message = "The quantity is required.")
-    @Min(value = 1, message = "The quantity must be equal or greater than 1")
-    private int quantity;
-    
-    @NotNull(message = "The price is required.")
-    @Min(value = 1, message = "The price must be equal or greater than 1")
-    private double price;
+  private int id;
+ @NotBlank(message = "The name is required.")
+  @Size(min = 3, max = 25, message = "The name must be from 3 to 25 characters.")
+  private String name;
 
-	public int getId() {
-		return id;
-	}
+ @NotNull(message = "The quantity is required.")
+ @Min(value=1, message = "The quantity must be equal or greater than 1")
+ @Max(value=2147483647)
+  private int quantity;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+ @NotNull(message = "The price is required.")
+ @Min(value = 1 , message = "The price must be equal or greater than 1")
+ @Max(value=2147483647)
+  private double price;
 
-	public String getName() {
-		return name;
-	}
+  public int getId() {
+      return id;
+  }
+  public void setId(int id) {
+      this.id = id;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public String getName() {
+      return name;
+  }
 
-	public int getQuantity() {
-		return quantity;
-	}
+  public void setName(String name) {
+      this.name = name;
+  }
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+  public int getQuantity() {
+      return quantity;
+  }
 
-	public double getPrice() {
-		return price;
-	}
+  public void setQuantity(int quantity) {
+      this.quantity = quantity;
+  }
 
-	public void setPrice(double price) {
-		this.price = price;
-	}
-    
-    
-    
-	
+  public double getPrice() {
+      return price;
+  }
 
+  public void setPrice(double price) {
+      this.price = price;
+  }
 
-   
 }

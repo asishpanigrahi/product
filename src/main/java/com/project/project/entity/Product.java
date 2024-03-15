@@ -1,6 +1,7 @@
 package com.project.project.entity;
 
-import org.hibernate.annotations.Check;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,25 +24,30 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@SQLDelete(sql = "UPDATE product SET deleted = 'true' WHERE id=?")
+@Where(clause = "deleted=false")
 public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    
-    @Column(nullable = false, length = 20)
-    @NotBlank(message = "The name is required.")
-    @Size(min = 3,max = 20, message = "The name must be from 3 to 20 characters.")
-    private String name;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-    @Column(nullable = false)
-    @NotNull(message = "The quantity is required.")
-    @Min(value = 1, message = "The quantity must be equal or greater than 1")
-    private int quantity;
-    
-    @Column(nullable = false)
-    @NotNull(message = "The price is required.")
-    @Min(value = 1, message = "The price must be equal or greater than 1")
-    private double price;
+	@Column(nullable = false, length = 20)
+	 @NotBlank(message = "The name is required.")
+	 @Size(min = 3,max = 20, message = "The name must be from 3 to 20 characters.")
+	private String name;
+
+	@Column(nullable = false)
+	@NotNull(message = "The quantity is required.")
+	@Min(value = 1, message = "The quantity must be equal or greater than 1")
+	private int quantity;
+
+	@Column(nullable = false)
+	 @NotNull(message = "The price is required.")
+	@Min(value = 1, message = "The price must be equal or greater than 1")
+	private double price;
+
+	@Column(nullable = false)
+	private boolean deleted = false;
 
 	public int getId() {
 		return id;
@@ -75,11 +81,12 @@ public class Product {
 		this.price = price;
 	}
 
-	public void setDeleted(boolean b) {
-		// TODO Auto-generated method stub
-		
+	public boolean isDeleted() {
+		return deleted;
 	}
 
-	    
-    
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
 }

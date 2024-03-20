@@ -15,50 +15,65 @@ import lombok.Setter;
 @Data
 public class ProductDTO {
 
-  private int id;
- @NotBlank(message = "The name is required.")
-  @Size(min = 3, max = 25, message = "The name must be from 3 to 25 characters.")
-  private String name;
+	private int id;
+	@NotBlank(message = "The name is required.")
+	@Size(min = 3, max = 25, message = "The name must be from 3 to 25 characters.")
+	private String name;
 
- @NotNull(message = "The quantity is required.")
- @Min(value=1, message = "The quantity must be equal or greater than 1")
- @Max(value=2147483647)
-  private int quantity;
+	@NotNull(message = "The quantity is required.")
+	@Min(value = 1, message = "The quantity must be equal or greater than 1")
+	@Max(value = 2147483647)
+	private int quantity;
 
- @NotNull(message = "The price is required.")
- @Min(value = 1 , message = "The price must be equal or greater than 1")
- @Max(value=2147483647)
-  private double price;
+	@NotNull(message = "The price is required.")
+	@Min(value = 1, message = "The price must be equal or greater than 1")
+	@Max(value = 2147483647)
+	private double price;
 
-  public int getId() {
-      return id;
-  }
-  public void setId(int id) {
-      this.id = id;
-  }
+	//private byte[] fileData;
 
-  public String getName() {
-      return name;
-  }
+	public int getId() {
+		return id;
+	}
 
-  public void setName(String name) {
-      this.name = name;
-  }
+	/*
+	 * public byte[] getFileData() { return fileData; }
+	 * 
+	 * public void setFileData(byte[] fileData) { this.fileData = fileData; }
+	 */
 
-  public int getQuantity() {
-      return quantity;
-  }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-  public void setQuantity(int quantity) {
-      this.quantity = quantity;
-  }
+	public String getName() {
+		return name;
+	}
 
-  public double getPrice() {
-      return price;
-  }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-  public void setPrice(double price) {
-      this.price = price;
-  }
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductDTO [id=" + id + ", name=" + name + ", quantity=" + quantity + ", price=" + price + "]";
+	}
+
 
 }

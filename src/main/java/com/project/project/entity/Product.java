@@ -1,13 +1,17 @@
 package com.project.project.entity;
+import java.util.Arrays;
+import java.util.List;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -32,8 +36,8 @@ public class Product {
 	private int id;
 
 	@Column(nullable = false, length = 20)
-	 @NotBlank(message = "The name is required.")
-	 @Size(min = 3,max = 20, message = "The name must be from 3 to 20 characters.")
+	@NotBlank(message = "The name is required.")
+	@Size(min = 3, max = 20, message = "The name must be from 3 to 20 characters.")
 	private String name;
 
 	@Column(nullable = false)
@@ -42,13 +46,31 @@ public class Product {
 	private int quantity;
 
 	@Column(nullable = false)
-	 @NotNull(message = "The price is required.")
+	@NotNull(message = "The price is required.")
 	@Min(value = 1, message = "The price must be equal or greater than 1")
 	private double price;
 
 	@Column(nullable = false)
 	private boolean deleted = false;
 
+
+	//private byte[] fileData;
+
+	 @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	    private List<FileEntity> files;
+	 
+	  public List<FileEntity> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<FileEntity> files) {
+		this.files = files;
+	}
+
+	@Override public String toString() { return "Product [id=" + id + ", name=" +
+	  name + ", quantity=" + quantity + ", price=" + price + ", deleted=" + deleted
+	  + "]"; }
+	 
 	public int getId() {
 		return id;
 	}
@@ -89,4 +111,11 @@ public class Product {
 		this.deleted = deleted;
 	}
 
+	/*
+	 * public byte[] getFileData() { return fileData; }
+	 * 
+	 * public void setFileData(byte[] fileData) { this.fileData = fileData; }
+	 */
+	 
+	 
 }
